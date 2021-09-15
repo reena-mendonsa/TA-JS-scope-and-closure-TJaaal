@@ -5,7 +5,14 @@
 - It should work exactly like array `forEach` method
 
 ```js
-function forEach() {}
+function forEach(strArr,fn) {
+   
+  let i; // Declare variable
+  for (i = 0; i < strArr.length; i++){
+       fn(strArr[i]);
+  }
+ 
+}
 
 forEach(['Sam', 'Jon', 'Arya'], (name, i, arr) =>
   console.log(name + name, i, arr)
