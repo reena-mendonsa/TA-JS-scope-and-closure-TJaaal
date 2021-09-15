@@ -7,11 +7,9 @@
 ```js
 function forEach(strArr,fn) {
    
-  let i; // Declare variable
-  for (i = 0; i < strArr.length; i++){
-       fn(strArr[i]);
-  }
- 
+ strArr.reduce((acc,cv,index,strArr)=>{
+   fn(cv,index,strArr);
+ })
 }
 
 forEach(['Sam', 'Jon', 'Arya'], (name, i, arr) =>
@@ -26,8 +24,13 @@ forEach(['Sam', 'Jon', 'Arya'], (name, i, arr) =>
 - It should work exactly like array `map` method
 
 ```js
-function map() {
+function map(strArr,fn) {
   // Your code goes here
+  return strArr.reduce((acc,cv,i,strArr)=>{
+    acc.push(cb(cv,i,strArr));
+    return acc;
+  },[]);
+ 
 }
 
 map(['Sam', 'Jon', 'Arya'], (name) => name + name); // ['SamSam', 'JonJon', 'AryaArya']
@@ -40,10 +43,17 @@ map(['Sam', 'Jon', 'Arya'], (name) => name + name); // ['SamSam', 'JonJon', 'Ary
 - It should work exactly like array `filter` method
 
 ```js
-function filter() {
+function filter(strArr,fn) {
   // Your code goes here
+return strArr.reduce((acc,cv,i,strArr)=>{
+  if(fn(cv,i,strArr)){
+    acc.push(cv);
+  }
+  return acc;
+},[]); 
 }
-filter(['Sam', 'Jon', 'Arya'], (name) =>
+let result=filter(['Sam', 'Jon', 'Arya'], (name) =>
   name.startsWith('S')
 ); // ['Sam']
+console.log(result);
 ```
