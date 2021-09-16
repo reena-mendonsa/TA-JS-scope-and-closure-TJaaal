@@ -4,19 +4,41 @@
 
 ```js
 // Your code goes here
+function outer(str){
+  let sayHello = function(){
+    alert(`${str}`);
+
+  }
+  return sayHello();  
+}
+outer("Reena");
 ```
 
 2. Write a function `delay` that accepts two arguments, a callback and the wait for the time in milliseconds (1000 ms is 1 second). `delay` should return a function that, when invoked waits for the specified amount of time before executing. (Use setTimeout)
 
 ```js
 // Your code goes here
+function delay(cb ,time){
+  
+  return setTimeout(cb,time);
+ 
+}
+function startPrg(str){
+  console.log(`Program execution started`);
+}
+
+delay(startPrg , 1000);
 ```
 
 3. Write a function with a closure. The first function should only take one argument, someone's last name, and return the inner function. The returned `inner` function should take one more argument, someone's first name. When inner function when called it should console.log both the first name and the last name with a space.
 
 ```js
-function lastName() {
+function lastName(lastName) {
   //  Your code goes here
+  function firstName(name){
+    console.log(`${name}+ ` `+ ${lastName}`);
+  }
+  return firstName;
 }
 
 let lastNameLee = lastName('lee'); // logs nothing
@@ -35,12 +57,23 @@ lastNameLee('Lynne'); //logs 'Lynne Lee'
 ```js
 function storyWriter() {
   // Your code goes here
+  
+  let story="Once upon a time,";
+  return{
+    addWords: function(addStory){
+      return story+=addStory;
+    },
+    erase: function(){
+      return story="";
+    }
+  }
 }
+
 
 // Test
 let farmLoveStory = storyWriter();
 farmLoveStory.addWords('There was once a lonely cow.'); // 'There was once a lonely cow.'
-farmLoveStory.addWords('It saw a friendly face.'); //'There was once a lonely cow. It saw a friendly face.'
+farmLoveStory.addWords('It saw. a friendly face.'); //'There was once a lonely cow. It saw a friendly face.'
 farmLoveStory.erase(); //''
 
 let storyOfMyLife = storyWriter();
@@ -54,9 +87,14 @@ storyOfMyLife.erase(); // ''
 When `forEach` function is called it returns another function. When the returned function is called it returns the element from the array at specific index. Every time you call the returned function the value of index should increment.
 
 ```js
-function forEach() {
-  // Your code goes here
+function forEach(arr) {
+  let index = 0;
+  return function inner(){
+    console.log(arr[index]);
+    index++;
+  } 
 }
+let next = forEach([1,2,3,4]);
 
 let next = [1, 2, 3, 4, 5];
 next(); // 1
@@ -73,6 +111,9 @@ The returned function accepts a string `prefix` and returns `prefix` and `title`
 ```js
 function addDesignation(title) {
   // your code goes here
+  return function addTitle(prefix){
+    console.log(`${prefix} ${title}`);
+  }
 }
 
 let sales = addDesignation('Salesman');
@@ -80,6 +121,7 @@ sales('Main'); // Main Salesman
 
 let manager = addDesignation('Manager');
 manager('Regional'); // Regional Manager
+
 manager('Head'); // Head Manager
 ```
 
@@ -90,8 +132,19 @@ manager('Head'); // Head Manager
 - `current` will return the current salary returns the updated salary
 
 ```js
-function changeSalary() {
+function changeSalary(salary) {
   // Your code goes here
+  return {
+    raise: function (){
+     return salary += 500;
+    },
+    lower: function(){
+      return salary= salary-500;
+    },
+    current: function(){
+      return salary;
+    }
+  }
 }
 
 let sam = changeSalary(2000);
@@ -109,6 +162,20 @@ arya.lower(); // 3500
 
 ```js
 // Your code goes here
+function nameFactory(firstName,secondName){
+  return {
+    getFullName: function (){
+      return `${firstName} ${secondName}`; 
+    },
+    setFirstName: function(name){
+      firstName=name;
+      return `${firstName} ${secondName}`;
+    },
+    setLastName:function(lastName){
+      return `${firstName} ${lastName}`;
+    }
+  }
+}
 
 let arya = nameFactory('Arya', 'Stark');
 arya.getFullName(); // "Arya Stark"
@@ -121,9 +188,15 @@ arya.setLastName('Lannister'); // "Jon Lannister"
 The returned function accepts a string (children) and returns the children with the tag you passed.
 
 ```js
-function createTag() {
-  // your code goes here
+function createTag(tag) {
+  return (text) => `<${tag}>${text}</${tag}>` 
 }
+
+let bold = createTag('b');
+bold('Hello World!'); // <b>Hello World!</b>
+
+let italic = createTag('i');
+italic('Hello World!'); // <i>Hello World!</i>
 
 let bold = createTag('b');
 bold('Hello World!'); // <b>Hello World!</b>
