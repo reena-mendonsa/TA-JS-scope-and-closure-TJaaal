@@ -4,6 +4,12 @@
 
 ```js
 // Your code goes here
+function multiplyBy(a){
+  function double(b){
+    return a*b;
+  }
+  return double;
+}
 
 const double = multiplyBy(2);
 const final = double(15); // final should be 30
@@ -13,9 +19,17 @@ const final = double(15); // final should be 30
 
 ```js
 // Your code goes here
+function fullName(firstName){
+  function name(lastName){
+        return `${firstName} ${lastName}`;
+  }
 
+  
+  return name;
+}
 const name = fullName('Will');
 const final = name('Smith'); // final should be "Will Smith"
+console.log(final);
 ```
 
 3. Write a function called `isInBetween` which takes two parameter `a` and `b` and returns a function. When you call the returned function with any number it returns `true` if the value is in between `a` and `b`.
@@ -23,6 +37,13 @@ const final = name('Smith'); // final should be "Will Smith"
 ```js
 function isInBetween(a, b) {
   // your code goes here
+  function result(num){
+    if(num>10 && num <100){
+      return true;
+    }
+    else { return false ;}
+  }
+  return result;
 }
 
 const isChild = isInBetween(10, 100);
@@ -36,6 +57,11 @@ isChild(103); // false
 ```js
 function letsWishThem(greeting) {
   // your code goes here
+
+    function greetings(str){
+           return `${greeting} ${str}`;
+    }
+    return greetings;
 }
 
 const callWithHey = letsWishThem('Hey');
@@ -47,8 +73,13 @@ callWithHello('How Are You?'); // Hello How Are You?
 5. Write a function called `addGame` which takes a string (name of the game) and the current score. It returns a function calling that will increment the score by one and print something like `Score of Basketball is 1`.
 
 ```js
-function addGame(gameName) {
+function addGame(gameName,num) {
   // your code goes here
+  let score = num+1;
+  function incrementScore(){
+    return `Score of ${gameName} is ${score}`;
+  }
+  return incrementScore;
 }
 
 // Output
@@ -65,6 +96,12 @@ cricket(); // Your score of Cricket is 2
 ```js
 function getCard(suit) {
   // your code goes here
+  let cards = [2,3,4,5,6,7,8,9,10,"J","Q","K","A"];
+  function randomCards(){
+    let randomCard = cards[Math.floor(Math.random()*cards.length)];
+    return(`Card is: ${randomCard} ${suit}`);
+  }
+  return randomCards;
 }
 
 // Output
