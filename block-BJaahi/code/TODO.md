@@ -60,11 +60,20 @@ function sayHello(name) {
 let message = sayHello(username);
 var nextMessage = sayHello('Test');
 ```
-
-<!-- Answer -->
-
 ```js
-// Your code goes here
+<!-- Answer -->
+// Declaration phase
+var username = undefined;
+let number;
+function sayHello(name) {
+  return `Hello ${name}`;
+}
+
+let message;
+var nextMessage = undefined;
+
+// Execution phase
+Uncaught ReferenceError: numbers is not defined
 ```
 
 3.
@@ -85,7 +94,17 @@ var nextMessage = sayHello('Test');
 <!-- Answer -->
 
 ```js
-// Your code goes here
+// declaration phase
+var username = undefined;
+let number;
+let sayHello = fn();
+
+let message;
+var nextMessage = undefined;
+
+
+//Execution phase
+Uncaught ReferenceError: numbers is not defined
 ```
 
 4.
@@ -107,7 +126,15 @@ var nextMessage = sayHello('Test');
 <!-- Answer -->
 
 ```js
-// Your code goes here
+//Declaration phase
+let username;
+let number;
+let message;
+let sayHello;
+var nextMessage=undefined;
+//Execution phase
+let username ='Arya';
+Uncaught ReferenceError: numbers is not defined
 ```
 
 5.
@@ -122,7 +149,12 @@ let age = 21;
 <!-- Answer -->
 
 ```js
-// Your code goes here
+// declaration phase
+var name=undefined;
+let age;
+
+// execution phase
+Error:  age not defined
 ```
 
 6.
@@ -141,7 +173,16 @@ sayHi();
 <!-- Answer -->
 
 ```js
-// Your code goes here
+//declaration phase
+
+
+//execution phase
+sayhi();
+//declaration phase
+var name =undefined;
+let age ;
+//execution phase
+Error :age not defined
 ```
 
 7.
@@ -159,7 +200,17 @@ function sayHi(name) {
 <!-- Answer -->
 
 ```js
-// Your code goes here
+//declaration phase
+
+
+//execution phase
+sayhi();
+//declaration phase
+var name =undefined;
+let age ;
+//execution phase
+Error :age not access before initialisation
+
 ```
 
 8.
@@ -177,7 +228,21 @@ let sayHi = function sayHi(name) {
 <!-- Answer -->
 
 ```js
-// Your code goes here
+//declaration phase
+let sayHi ;
+
+//execution phase
+let sayHi =fn();
+function sayHi(){
+  console.log(name);
+  console.log(age);
+  //declaration phase
+  var name = undefined;
+  let age ;
+
+  //execution phase 
+  Error :age cannot be accessed before initialisation
+}
 ```
 
 9.
@@ -192,7 +257,14 @@ let num2 = 30;
 <!-- Answer -->
 
 ```js
-// Your code goes here
+// declaration phase
+let num1;
+var sum=undefined;
+let num2;
+
+//execution phase
+let num =21;
+Error : num2 is not defined;
 ```
 
 10.
@@ -216,7 +288,17 @@ let sum = add(num1, num2, 4, 5, 6);
 <!-- Answer -->
 
 ```js
-// Your code goes here
+//declaration phase
+var num1 =undefined;
+let sum2 ;
+let add;
+let num2;
+let sum;
+
+//execution phase
+let num=21;
+let sum =fn;
+error : addAgain not defined
 ```
 
 11.
@@ -237,7 +319,16 @@ let add = (a, b) => {
 <!-- Answer -->
 
 ```js
-// Your code goes here
+// declaration phase
+let sum;
+let add;
+//execution phase
+let sum = test(100);
+function test(a) {
+  let num1 = 21;
+  return add(a, num1);
+}
+
 ```
 
 12.
@@ -258,5 +349,16 @@ function add(a, b) {
 <!-- Answer -->
 
 ```js
-// Your code goes here
+// declaration phase
+let sum;
+// execution phase
+let sum= fn;
+function test(a) {
+  let num1 = 21;
+  return add(a, num1);
+}
+function add(a, b) {
+  return a + b;
+}
+
 ```
