@@ -6,7 +6,14 @@ The returned function accepts a sentence. If the sentence contains the `fromWord
 
 ```js
 function censor(fromWord, toWord) {
-  //  Your code goes here
+
+  function newSentence(str){
+     if(str.includes(fromWord)){
+       return str.replace(fromWord,toWord);
+     }
+  }
+
+  return newSentence;
 }
 
 let censorSentence = censor('World', 'Sam');
@@ -25,7 +32,24 @@ The returned function either accepts two parameter or one parameter.
 
 ```js
 function multipleCensor() {
-  //  Your code goes here
+   let array=[];
+  function callback(...args){
+     let str;
+     if(args.length==2){
+       array.push(args);
+       console.log(array);
+     }
+     if(args.length==1){
+       str = args[0];
+       array.forEach((elm,index) =>{
+        str= str.replace(`${elm[0]}`,`${elm[1]}`);
+       });
+       return str;  
+     }
+     
+  }
+  return callback;
+  
 }
 
 let censorQuote = multipleCensor();
@@ -49,8 +73,20 @@ The returned function accepts one parameter.
 - If the parameter is the same as the password it will return the object in which we stored the values.
 
 ```js
-function createCache() {
-  // Your code goes here
+function createCache(cb,str) {
+  let obj={};
+  function fn(arg){
+      if (arg != str){
+        let value=cb(arg);
+        obj[arg] =value;
+        return value;
+      }
+      if(arg == str){
+        return obj;
+      }
+      
+  }
+  return fn;
 }
 
 function add10(num) {
@@ -69,8 +105,27 @@ addCache('foo'); // {12: 22, 100: 110, 1: 11}
 4. Change the above function in such a way that when the returned function is called with any other value than password. It should first check the object where we are storing the argument and return value. If the key is present return the value form the object itself. Otherwise call the callback function with the parameter.
 
 ```js
-function createCache() {
-  // Your code goes here
+function createCache(cb,str) {
+  let obj={};
+  function fn(arg){
+      if (arg != str){
+        let value;
+        if(obj.value == arg){
+          return obj.value;
+        }
+        else{
+          value=cb(arg);
+          obj[arg] =value;
+        return value;
+        }
+        
+      }
+      if(arg == str){
+        return obj;
+      }
+      
+  }
+  return fn;
 }
 
 function add10(num) {
